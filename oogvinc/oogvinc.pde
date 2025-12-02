@@ -1,8 +1,12 @@
 boolean gameOver = false;
 boolean gameStart = true;
 boolean win = false;
+int timer = 0;
 Player you;
 ArrayList<Obsticle> balls;
+float tempX=0;
+float tempY=0;
+
 
 void setup() {
   size(1200, 400);
@@ -31,30 +35,49 @@ void draw() {
     //the finish line
     fill(0, 255, 0);
     rect(1000, 0, 1200, 400);
-    
+
     //shows the player
     you.show();
-    
-    //                      for(int n = 
-    //somthing that adds 2 to arraylist every few seconds
-    
+
+    //every few seconds spawns new obstacles
+    if (timer % 180 == 0) {
+      //makes 2 new instances
+      balls.add(new Obsticle());
+      balls.add(new Obsticle());
+      //starts them
+      Obsticle new1 = balls.get(balls.size()-1);
+      new1.begin();
+      Obsticle new2 = balls.get(balls.size()-2);
+      new2.begin();
+    }
+//scans for any instances that have passed the end of the line
+    for (int i = 0; i < balls.size(); i++) {
+      Obsticle whatever = balls.get(i);
+      if ( whatever.finished()==true) {
+        balls.remove(i);
+      }
+    }
+     //scanning if any balls hit us, or if we crossed the finish line
+     
+
+
     //shows all current balls
-    for (int i = 0; i < balls.size(); i++){
-   Obsticle guy = balls.get(i);
-      guy.show();
-    
+    for (int i = 0; i < balls.size(); i++) {
+      Obsticle whatever = balls.get(i);
+      whatever.show();
     }
     
-    
+
+    timer++;
   }
 }
 
 void endScreen() {
-  
+//clears balls and resets the spawning timer
   balls.clear();
-
+  timer=0;
+  
   if (win ==false) {
-
     background(255, 0, 0);//red
     text("Game Over", width/2, height/2);
   } else {
@@ -64,6 +87,11 @@ void endScreen() {
     //resetting back to the loss state is handled in keyPressed()
   }
 }
+ void didWeHitSomthing(){
+   //getting the player's position
+ tempX=you.where(true);
+ tempY=you.where(false);
+ }
 
 void keyPressed() {
   //restarts the game if on game over/won screen
