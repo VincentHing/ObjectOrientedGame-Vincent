@@ -1,17 +1,30 @@
 
 class Player {
   PVector position = new PVector();
-
+  PImage goober;
 
   Player() {
+    //preparing funny image
+    goober = loadImage("goofyGuy.png");
+    goober.resize(50, 50);
+    imageMode(CENTER);
+    //funny image ready
+
+    //starting position
     position.x=140;
     position.y=200;
   }
-  void show() {
-    fill(0,0,255);
-    ellipse(position.x,position.y,50,50);
+  void begin() {
+    position.x=140;
+    position.y=200;
   }
-  
+
+
+  void show() {
+    //funny image deployed
+    image(goober, position.x, position.y);
+  }
+
   void move(int direction) {
     if (direction==1) {
       //move up
