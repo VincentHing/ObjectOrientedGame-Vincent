@@ -2,6 +2,7 @@ boolean gameOver = false;
 boolean gameStart = true;
 boolean win = false;
 Player you;
+ArrayList<Obsticle> balls;
 
 void setup() {
   size(1200, 400);
@@ -10,6 +11,7 @@ void setup() {
   textAlign(CENTER);
   textSize(104);
   you = new Player();
+  balls = new ArrayList<Obsticle>();
 }
 
 void draw() {
@@ -26,16 +28,30 @@ void draw() {
     line(100, 100, 1000, 100);
     line(100, 200, 1000, 200);
     line(100, 300, 1000, 300);
-    fill(0, 255, 0);
     //the finish line
+    fill(0, 255, 0);
     rect(1000, 0, 1200, 400);
     
     //shows the player
     you.show();
+    
+    //                      for(int n = 
+    //somthing that adds 2 to arraylist every few seconds
+    
+    //shows all current balls
+    for (int i = 0; i < balls.size(); i++){
+   Obsticle guy = balls.get(i);
+      guy.show();
+    
+    }
+    
+    
   }
 }
 
 void endScreen() {
+  
+  balls.clear();
 
   if (win ==false) {
 
