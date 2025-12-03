@@ -18,7 +18,7 @@ class Obsticle {
   }
 
   void show() {
-
+//draws the evil red balls
     fill(255, 0, 0);
     ellipse(position.x, position.y, 50, 50);
     position.x--;
@@ -28,5 +28,21 @@ class Obsticle {
     else {
       return false;
     }
+  }
+  void didIGetHim(float hisX, float hisY) {
+
+    //converting the player X value into the line number used by the balls
+    //i really didn't need to do that but i realised that too late
+    hisY=(hisY/100)-1;
+
+    float distance= hisX - position.x;
+    //getting rid of a negative distance
+    distance = distance*distance;
+    if (distance<=100 && hisY==lineN) {
+      gameOver=true;
+    }
+    //clearing temp variables just in case
+    hisX=0;
+    hisY=0;
   }
 }

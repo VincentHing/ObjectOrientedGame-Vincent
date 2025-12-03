@@ -45,7 +45,7 @@ class Player {
     }
   }
   float where (boolean XorY){
-    
+    //stupid way of fetching both the player's X and Y co-ordinates by asking twice
   if (XorY==true) return position.x;
   else return position.y;
   }
